@@ -115,4 +115,20 @@ describe('tld.js', function () {
       expect(tld.getSubdomain('emergency.blogspot.co.uk')).to.equal('emergency');
     });
   });
+
+  describe('updateFromText method', function(){
+    it('should parse the optimised text format', function(){
+      var rules = [
+        '2cy',
+        '0com 0compute.amazonaws 0us-east-1.amazonaws 0compute-1.amazonaws',
+        '2uk 2sch 1bl 1british-library'
+      ].join("\n");
+
+      tld.updateFromText(rules);
+
+      expect(tld.rules).to.have.keys('cy', 'com', 'uk');
+      expect(tld.rules.cy).to.eq('2cy');
+      expect(tld.rules.uk).to.eq('2uk 2sch 1bl 1british-library');
+    });
+  });
 });
