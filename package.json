@@ -52,7 +52,8 @@
     "grunt-cli": "~0.1.9",
     "jshint": "~2.1.11",
     "chai": "~1.8.1",
-    "uglify-js": "~2.4.3"
+    "uglify-js": "~2.4.3",
+    "benchmark": "~1.0.0"
   },
   "keywords": [
     "tld",
