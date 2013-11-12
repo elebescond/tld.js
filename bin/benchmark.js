@@ -9,10 +9,10 @@ var rules = {
 };
 
 var onComplete = function onComplete() {
-  console.log('Fastest', this.name, 'is ' + this.filter('fastest').pluck('name'));
+  console.log(this.name, 'winner is ' + this.filter('fastest').pluck('name'));
 };
 var onCycle = function onCycle(event) {
-  console.log(String(event.target));
+  console.log(event.currentTarget.name + ' - ' + event.target);
 };
 
 function withJsonData(config){
@@ -54,12 +54,12 @@ function withTextData(config){
   .run({ async: true });
 
 
-(new Benchmark.Suite('Tld w/o Sld'))
+(new Benchmark.Suite('google.am'))
   .add(withJsonData({
     name: 'json',
     fn: function(tld){
       return function(){
-        return tld.getRulesForTldJSON('am');
+        tld.getDomain('www.google.am');
       }
     }
   }))
@@ -67,28 +67,7 @@ function withTextData(config){
     name: 'text',
     fn: function(tld){
       return function(){
-        tld.getRulesForTld('am');
-      }
-    }
-  }))
-  .on('cycle', onCycle)
-  .on('complete', onComplete)
-  .run({ async: true });
-
-(new Benchmark.Suite('Tld with regular Sld'))
-  .add(withJsonData({
-    name: 'json',
-    fn: function(tld){
-      return function(){
-        return tld.getRulesForTldJSON('com');
-      }
-    }
-  }))
-  .add(withTextData({
-    name: 'text',
-    fn: function(tld){
-      return function(){
-        tld.getRulesForTld('com');
+        tld.getDomain('www.google.am');
       }
     }
   }))
@@ -96,12 +75,12 @@ function withTextData(config){
   .on('complete', onComplete)
   .run();
 
-(new Benchmark.Suite('Tld with a lot of rules Sld'))
+(new Benchmark.Suite('google.com'))
   .add(withJsonData({
     name: 'json',
     fn: function(tld){
       return function(){
-        return tld.getRulesForTldJSON('jp');
+        tld.getDomain('www.google.com');
       }
     }
   }))
@@ -109,7 +88,28 @@ function withTextData(config){
     name: 'text',
     fn: function(tld){
       return function(){
-        tld.getRulesForTld('jp');
+        tld.getDomain('www.google.com');
+      }
+    }
+  }))
+  .on('cycle', onCycle)
+  .on('complete', onComplete)
+  .run();
+
+(new Benchmark.Suite('google.blogspot.jp'))
+  .add(withJsonData({
+    name: 'json',
+    fn: function(tld){
+      return function(){
+        tld.getDomain('www.google.blogspot.jp');
+      }
+    }
+  }))
+  .add(withTextData({
+    name: 'text',
+    fn: function(tld){
+      return function(){
+        tld.getDomain('www.google.blogspot.jp');
       }
     }
   }))

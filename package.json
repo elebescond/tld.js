@@ -22,7 +22,8 @@
     "build-rules": "grunt update",
     "build-browser": "browserify -r ./index.js -s tld > dist/tld.js",
     "build-compress": "uglifyjs -b beautify=false,quote-keys=true dist/tld.js > dist/tld.min.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "benchmarks": "node ./bin/benchmark.js"
   },
   "engines": {
     "node": "0.8.x || 0.10.x"
