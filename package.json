@@ -20,7 +20,7 @@
     "test-browser": "testling",
     "build": "npm run build-rules && npm run build-browser && npm run build-compress",
     "build-rules": "grunt update",
-    "build-browser": "browserify -r ./index.js -s tld > dist/tld.js",
+    "build-browser": "browserify -t brfs -r ./index.js -s tld > dist/tld.js",
     "build-compress": "uglifyjs -b beautify=false,quote-keys=true dist/tld.js > dist/tld.min.js",
     "prepublish": "npm run build",
     "benchmarks": "node ./bin/benchmark.js"
@@ -54,7 +54,8 @@
     "jshint": "~2.1.11",
     "chai": "~1.8.1",
     "uglify-js": "~2.4.3",
-    "benchmark": "~1.0.0"
+    "benchmark": "~1.0.0",
+    "brfs": "0.0.8"
   },
   "keywords": [
     "tld",

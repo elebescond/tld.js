@@ -51,7 +51,7 @@ function withTextData(config){
   })
   .on('cycle', onCycle)
   .on('complete', onComplete)
-  .run({ async: true });
+  .run();
 
 
 (new Benchmark.Suite('google.am'))
